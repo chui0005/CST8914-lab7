@@ -28,17 +28,18 @@
     <body>
       <h1>Feedback form</h1>
       <form aria-describedby="instructions">
+        <!-- For entire form: added paragraph with instructions. linked it to form with  aria-describedby-->
         <p id="instructions">
           Fields marked with <span class="required">*</span> are required.
         </p>
-        <!-- Full name -->
+        <!-- For Full name: added for in label to link it with input tag. Added required and aria-required attribs to input tag -->
         <div class="control">
           <label for="name">
             Full name <span class="required">*</span>
           </label>
           <input id="name" name="name" type="text" required="required" aria-required="true"/>
         </div>
-        <!-- Biography -->
+        <!-- For Biography: added for attirb to label to link it to textarea. Added aria-describedby to textarea to link it to span explaining what is needed -->
         <div class="control">
           <label for="biography">Biography</label>
           <textarea
@@ -48,7 +49,8 @@
           ></textarea>
           <span id="bioHint">Include examples of your skills in JavaScript.</span>
         </div>
-        <!-- Gender group -->
+        <!-- Gender group: used fieldset and aria-required to group inputs and indicate they're required. 
+         Added a legend to the field set. Added  for attrib to each label for each input in fieldset-->
         <fieldset class="control" aria-required="true">
           <legend>Gender <span class="required">*</span></legend>
           <div>
@@ -70,7 +72,7 @@
             <label for="gender_female">Female</label>
           </div>
         </fieldset>
-        <!-- Terms and Conditions -->
+        <!-- Terms and Conditions: Added for attrib to label for input. Added aria-required to input-->
         <div class="control">
           <input
             id="accept_agbs"
