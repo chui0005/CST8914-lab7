@@ -24,9 +24,10 @@ body {
 a{
   color: #006b3a;
 }
-main a{
-  outline: none;
-}
+/* Using accessibility insights I found that all the anchor tags within main didn't have focus indicators. 
+To resolve i removed outline: none from CSS . 
+ */
+
 h2 {
   margin-top: 0;
 }
@@ -206,7 +207,9 @@ article p {
       <nav class="menu">
         <a href="#">Home</a>
         <a href="#">Politics</a>
-        <a href="#" tabindex="-1">Business</a>
+        <!-- Using accessibility insights I found that this anchor tag has a tabindex= -1 which throws off the focus order . 
+           To resolve i removed the tabindex attrib since anchor tags are already focusable-->
+        <a href="#">Business</a>
         <a href="#">Entertainment</a>
         <a href="#">Sports</a>
         <a href="#" class="btn-search pull-right"><img src="https://raw.githubusercontent.com/udacity/ud891/2de2a0688c68809a3b453db3a24b1a59e8401459/lesson2-focus/02-dom-order/images/search.svg" alt="Search" />Search</a> 
@@ -214,14 +217,7 @@ article p {
       </nav>
     </div>
   </header>
-  <div class="newsletter">
-    <div class="container">
-      <h3>Like the Funion? Consider joining our newsletter!</h3>
-      <input type="text">
-      <button type="button" onfocus="getFocus()">Sign up</button></div>
-      
-    </div>
-  </div>
+
   <main class="container">
     <h2 class="offscreen">Top story</h2>
     <article class="main-story">
@@ -239,11 +235,15 @@ article p {
     <div class="side-by-side">
       <div class="column">
         <div class="tier-header">
-          <h2 tabindex="0">In the news</h2>
+          <!-- Using accessibility insights I found that this h2 tag has a tabindex=0 which throws off the focus order . 
+           To resolve I removed tabindex from attributes -->
+          <h2>In the news</h2>
         </div>
         <article>
           <h3 class="headline">Bee wonders if maybe everyone else is a drone and he's the only one who has it "figured out."</h3>
-          <p><a href="#" tabindex="1"><b>Read More</b></a></p>
+          <!-- Using accessibility insights I found that this paragraph having a tabindex=1 throws off the focus order . 
+           To resolve if the element needs to be focusable then change  tabindex value to 0-->
+          <p><a href="#" tabindex="0"><b>Read More</b></a></p>
           <img src="https://github.com/udacity/ud891/blob/gh-pages/lesson2-focus/02-dom-order/images/bee.jpg?raw=true" alt="A bee on top of a flower" />
         </article>
       </div>
@@ -286,10 +286,24 @@ article p {
     </div>
     
   </main>
-  <!--   stuff can be added here :)
-  <footer>
+  <!--   stuff can be added here :)  -->
+  <!-- Using accessibility insights I found the content that should have been in the footer was added before the main section. This messed up the focus order.
+       To reoslve I moved the content to the footer -->
+  <footer class="newsletter">
+    <div class="container">
+      <h3>Like the Funion? Consider joining our newsletter!</h3>
+
+      <!-- Using accessibility insights I found the input element was missing a label. To resolve I added: 
+        1) An aria-label so that assitive technologies can read it properly
+        2) placeholder so that visual users know what to enter -->
+      <input type="text" aria-label="Email address"> 
+      <!-- Using accessibility insights I found that once I tabbed to the sign up btton it automatically took me to a new wepbage. 
+       To resolve this i changed button event handler from onfocus to onclick -->
+      <button type="button" onclick="getFocus()">Sign up</button></div>
+      
+    </div>
   </footer>
-  -->
+ 
   
   <script>
     function getFocus() {
